@@ -1,3 +1,10 @@
+import 'package:borrowed_stuff/components/centered_circular_progress.dart';
+import 'package:borrowed_stuff/components/centered_message.dart';
+import 'package:borrowed_stuff/components/stuff_card.dart';
+import 'package:borrowed_stuff/controllers/home_controller.dart';
+import 'package:borrowed_stuff/models/stuff.dart';
+import 'package:borrowed_stuff/pages/stuff_detail_page.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -6,8 +13,128 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _controller = HomeController();
+
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.readAll().then((value) {
+      setState(() {
+        _loading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Objetos Emprestados'),
+      ),
+      floatingActionButton: _buildFloatActionButton(),
+      body: _buildStuffList(),
+    );
+  }
+
+  _buildFloatActionButton() {
+    return FloatingActionButton.extended(
+      label: Text('Emprestar'),
+      icon: Icon(Icons.add),
+      onPressed: _addStuff,
+    );
+  }
+
+  _buildStuffList() {
+    if (_loading) {
+      return CenteredCircularProgress();
+    }
+    if (_controller.stuffList.isEmpty) {
+      return CenteredMessage(
+        'Vazio',
+        icon: Icons.warning,
+      );
+    }
+
+    return ListView.builder(
+      itemCount: _controller.stuffList.length,
+      itemBuilder: (context, index) {
+        final stuff = _controller.stuffList[index];
+        return StuffCard(
+          stuff: stuff,
+          onDelete: () {
+            _deleteStuff(stuff);
+          },
+          onEdit: () {
+            _editStuff(index, stuff);
+          },
+        );
+      },
+    );
+  }
+
+  _addStuff() async {
+    print('New stuff');
+    final stuff = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StuffDetailPage(),
+      ),
+    );
+
+    if (stuff != null) {
+      setState(() {
+        _controller.create(stuff);
+      });
+
+      Flushbar(
+        title: 'Novo Empréstimo',
+        backgroundColor: Colors.black,
+        message: "${stuff.description} emprestado para ${stuff.contactName}.",
+        duration: Duration(seconds: 2),
+      )..show(context);
+    }
+  }
+
+  _editStuff(int index, Stuff stuff) async {
+    print('Edit Stuff');
+
+    final editedStuff = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StuffDetailPage(
+          editedStuff: stuff,
+        ),
+      ),
+    );
+
+    if (editedStuff != null) {
+      setState(() {
+        _controller.update(index, editedStuff);
+      });
+
+      Flushbar(
+        title: "Empréstimo Atualizado",
+        backgroundColor: Colors.black,
+        message:
+            "${editedStuff.description} emprestado para ${editedStuff.contactName}.",
+        duration: Duration(seconds: 2),
+      )..show(context);
+    }
+  }
+
+  _deleteStuff(Stuff stuff) {
+    print('Delete Stuff');
+    setState(() {
+      _controller.delete(stuff);
+    });
+
+    Flushbar(
+      title: 'Exclusão',
+      backgroundColor: Colors.red,
+      message: "${stuff.description} excluido com sucesso.",
+      duration: Duration(seconds: 2),
+    )..show(context);
   }
 }
