@@ -16,7 +16,7 @@ class Stuff {
   });
 
   String get loanDateString =>
-      '${loanDate.day.toString().padLeft(2, '0')}/${loanDate.month.toString().padLeft(2, '0')}';
+      '${loanDate.day.toString().padLeft(2, '0')}/${loanDate.month.toString().padLeft(2, '0')}/${loanDate.year.toString().padLeft(2, '0')}';
 
   bool get photoExist => photoPath != null && photoPath.isNotEmpty;
 
