@@ -26,7 +26,7 @@ class _PhotoContainerState extends State<PhotoContainer> {
     var image = await picker.getImage(source: ImageSource.camera);
 
     setState(() {
-      _image = image as File;
+      _image = File(image.path);
 
       if (widget.onChanged != null) {
         widget.onChanged(image.path ?? '');
