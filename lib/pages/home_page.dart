@@ -78,9 +78,7 @@ class _HomePageState extends State<HomePage> {
     print('New stuff');
     final stuff = await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => StuffDetailPage(),
-      ),
+      MaterialPageRoute(builder: (context) => StuffDetailPage()),
     );
 
     if (stuff != null) {
