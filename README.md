@@ -37,35 +37,18 @@ Loan management application (items loaned to others).
 
 ### Visual Structure
 
-<ol>
-    <li>Home Page Content</li>
-    <ul>
-        <li>
-            An upper bar containing the title: <em>Objetos Emprestados</em>.
-        </li>
-        <li>
-            Area where inserted objects are listed or a centralized alert icon if there are no items registered.
-        </li>
-        <li>
-            Floating button that leads to the insertion page (details page).
-        </li>
-    </ul>
-    <li start="2">Detail Page Content</li>
-    <ul>
-        <li>
-            Top bar containing a return button and the title: <em>Novo Empréstimo</em>.
-        </li>
-        <li>
-            Container where the photo of the object to be borrowed will be inserted / displayed.
-        </li>
-        <li>
-            Form to enter the details of the loan.
-        </li>
-        <li>
-            Button to make the records.
-        </li>
-    </ul>
-</ol>
+1. Home Page Content
+
+   - An upper bar containing the title: _Objetos Emprestados_.
+   - Area where inserted objects are listed or a centralized alert icon if there are no items registered.
+   - Floating button that leads to the insertion page (details page).
+
+2. Detail Page Content
+
+   - Top bar containing a return button and the title: _Novo Empréstimo_.
+   - Container where the photo of the object to be borrowed will be inserted / displayed.
+   - Form to enter the details of the loan.
+   - Button to make the records.
 
 ## :trident: Prototype
 
