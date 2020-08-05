@@ -50,7 +50,7 @@ Loan management application (items loaned to others).
             Floating button that leads to the insertion page (details page).
         </li>
     </ul>
-    <li>Detail Page Content</li>
+    <li start="2">Detail Page Content</li>
     <ul>
         <li>
             Top bar containing a return button and the title: <em>Novo Empréstimo</em>.
