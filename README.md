@@ -49,4 +49,5 @@ samples, guidance on mobile development, and a full API reference. -->
             </li>
         </ul>
     <h2>Preview</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/6me0-K_5b2I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6me0-K_5b2I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+        [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6me0-K_5b2I/0.jpg)](https://www.youtube.com/watch?v=6me0-K_5b2I)
